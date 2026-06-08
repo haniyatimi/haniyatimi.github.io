@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hani Yatimi | AI Tech Creator</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#040814;
+  --card:#081523;
+  --card2:#0A1728;
+  --cyan:#00D1FF;
+  --cyanSoft:#38D9FF;
+  --purple:#D64CFF;
+  --white:#F8FBFF;
+  --text:#D8E6F2;
+  --muted:#9DB0C2;
+  --border:rgba(198,248,0,.18);
+  --shadow:0 28px 90px rgba(0,0,0,.45);
+  --stage:0;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'Cairo',sans-serif;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(198,248,0,.12), transparent 35%),
+    radial-gradient(circle at 85% 15%, rgba(214,76,255,.10), transparent 30%),
+    #040814;
+  color:var(--white);
+  overflow-x:hidden;
+}
+
+a{text-decoration:none;color:inherit}
+
+/* ===== BACKGROUND ===== */
+#neural{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100vh;
+  z-index:-30;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(198,248,0,.12), transparent 35%),
+    radial-gradient(circle at 85% 15%, rgba(214,76,255,.10), transparent 30%),
+    #040814;
+}
+
+.tunnel{
+  position:fixed;
+  inset:-35%;
+  z-index:-25;
+  pointer-events:none;
+  opacity:.22;
+  background:repeating-radial-gradient(circle at center,rgba(198,248,0,.20) 0 1px,transparent 2px 78px);
+  transform:scale(calc(1 + var(--stage)*.20)) rotate(calc(var(--stage)*22deg));
+}
+
+.ai-head{
+  position:fixed;
+  inset:0;
+  z-index:-20;
+  display:grid;
+  place-items:center;
+  pointer-events:none;
+  opacity:calc(.42 - var(--stage)*.055);
+  filter:drop-shadow(0 0 42px rgba(198,248,0,.50));
+}
+
+.ai-head svg{
+  width:min(82vw,850px);
+  transform:scale(calc(1 + var(--stage)*.28)) rotate(calc(var(--stage)*1.5deg));
+  transition:.08s linear;
+}
+
+.ai-head .outline{
+  fill:none;
+  stroke:rgba(198,248,0,.58);
+  stroke-width:2.2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.ai-head .brain{
+  fill:none;
+  stroke:rgba(214,76,255,.58);
+  stroke-width:2.5;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-dasharray:10 12;
+  animation:dash 10s linear infinite;
+}
+
+.ai-head .circuit{
+  fill:none;
+  stroke:rgba(248,251,255,.22);
+  stroke-width:1.4;
+  stroke-dasharray:4 9;
+  animation:dash 14s linear infinite reverse;
+}
+
+.ai-head .node{
+  fill:#00D1FF;
+  filter:drop-shadow(0 0 10px #00D1FF);
+  animation:pulse 2.5s infinite ease-in-out;
+}
+
+.ai-head .node.purple{
+  fill:#D64CFF;
+  filter:drop-shadow(0 0 10px #D64CFF);
+}
+
+@keyframes dash{to{stroke-dashoffset:-280}}
+@keyframes pulse{50%{opacity:.28;transform:scale(.78)}}
+
+.container{
+  width:min(1180px,calc(100% - 36px));
+  margin:auto;
+}
+
+/* ===== NAV ===== */
+.nav{
+  position:fixed;
+  top:14px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(1120px,calc(100% - 28px));
+  z-index:80;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:12px 14px;
+  border:1px solid var(--border);
+  border-radius:28px;
+  background:rgba(8,21,35,.75);
+  backdrop-filter:blur(20px);
+  box-shadow:var(--shadow);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  direction:ltr;
+}
+
+.brand img{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  object-fit:cover;
+  object-position:center top;
+  border:2px solid rgba(198,248,0,.65);
+  box-shadow:0 0 28px rgba(198,248,0,.28);
+}
+
+.brand b{display:block;font-weight:900}
+.brand span{display:block;color:var(--cyan);font-size:12px;font-weight:900}
+
+.nav-links{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.nav-links a{
+  padding:10px 14px;
+  border-radius:999px;
+  font-weight:900;
+  font-size:14px;
+  color:var(--text);
+  transition:.25s;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+  background:rgba(198,248,0,.13);
+  color:#fff;
+}
+
+.top-wa{
+  padding:12px 16px;
+  border-radius:999px;
+  font-weight:900;
+  background:linear-gradient(135deg,#00D1FF,#6CE5FF);
+  color:#04101b;
+  transition:.25s;
+}
+
+.top-wa:hover{
+  background:linear-gradient(135deg,#00D1FF,#D64CFF);
+  transform:translateY(-3px);
+}
+
+.menu{
+  display:none;
+  background:transparent;
+  border:0;
+  color:white;
+  font-size:30px;
+}
+
+/* ===== SOCIAL DOCK ===== */
+.social-dock{
+  position:fixed;
+  left:18px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:70;
+  display:grid;
+  gap:12px;
+  padding:13px;
+  border-radius:26px;
+  background:rgba(255,255,255,.055);
+  border:1px solid var(--border);
+  backdrop-filter:blur(18px);
+  box-shadow:0 20px 55px rgba(0,0,0,.28);
+}
+
+.social-dock a{
+  width:48px;
+  height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:16px;
+  font-size:23px;
+  background:#081523;
+  border:1px solid rgba(255,255,255,.12);
+  transition:.28s;
+}
+
+.social-dock a:hover{
+  transform:translateY(-6px) scale(1.13);
+  box-shadow:0 0 28px currentColor;
+}
+
+/* Natural social colors */
+.instagram i,.social-card .fa-instagram{color:#E4405F}
+.tiktok i,.social-card .fa-tiktok{color:#FFFFFF}
+.youtube i,.social-card .fa-youtube{color:#FF0000}
+.telegram i,.social-card .fa-telegram{color:#26A5E4}
+.linkedin i,.social-card .fa-linkedin-in{color:#0A66C2}
+.facebook i,.social-card .fa-facebook-f{color:#1877F2}
+.twitter i,.social-card .fa-x-twitter{color:#FFFFFF}
+.whatsapp i,.social-card .fa-whatsapp{color:#25D366}
+.gmail i,.social-card .fa-envelope{color:#EA4335}
+
+/* ===== STAGE NAV ===== */
+.stage-nav{
+  position:fixed;
+  right:18px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:70;
+  display:grid;
+  gap:12px;
+  justify-items:center;
+}
+
+.stage-dot{
+  width:46px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.055);
+  backdrop-filter:blur(16px);
+  transition:.25s;
+}
+
+.stage-dot.active{
+  background:linear-gradient(135deg,#00D1FF,#D64CFF);
+  color:#fff;
+  box-shadow:0 0 28px rgba(198,248,0,.30);
+}
+
+.stage-line{
+  width:1px;
+  height:34px;
+  background:linear-gradient(var(--cyan),transparent);
+}
+
+/* ===== SECTIONS ===== */
+.section{
+  min-height:100vh;
+  display:grid;
+  align-items:center;
+  padding:112px 0;
+  opacity:.36;
+  transform:scale(.94);
+  transition:.58s ease;
+}
+
+.section.active{
+  opacity:1;
+  transform:scale(1);
+}
+
+.hero{padding-top:128px}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1fr 420px;
+  gap:58px;
+  align-items:center;
+  perspective:1500px;
+}
+
+.kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 16px;
+  border-radius:999px;
+  border:1px solid rgba(198,248,0,.32);
+  background:rgba(198,248,0,.08);
+  color:var(--cyan);
+  font-weight:900;
+  margin-bottom:18px;
+}
+
+h1,.section-title{
+  font-family:'Anton',sans-serif;
+  text-transform:uppercase;
+  letter-spacing:1.2px;
+}
+
+h1{
+  font-size:clamp(52px,6vw,92px);
+  line-height:.88;
+  direction:ltr;
+  text-shadow:0 14px 44px rgba(0,0,0,.35);
+}
+
+.gradient{
+  background:linear-gradient(90deg,#FFFFFF,#00D1FF,#D64CFF);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.stroke{
+  display:block;
+  color:transparent;
+  -webkit-text-stroke:1.3px rgba(248,251,255,.46);
+}
+
+.lead{
+  max-width:650px;
+  margin:24px 0;
+  color:var(--text);
+  line-height:1.95;
+  font-size:18px;
+  font-weight:600;
+}
+
+.pills{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:20px 0 28px;
+}
+
+.pill{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 13px;
+  border-radius:15px;
+  border:1px solid rgba(198,248,0,.20);
+  background:rgba(198,248,0,.07);
+  font-weight:900;
+}
+
+.actions{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  padding:15px 22px;
+  border-radius:17px;
+  background:linear-gradient(135deg,#00D1FF,#6CE5FF);
+  color:#04101b;
+  font-weight:900;
+  transition:.25s;
+  box-shadow:0 0 34px rgba(198,248,0,.18);
+}
+
+.btn:hover{
+  transform:translateY(-6px) scale(1.02);
+  background:linear-gradient(135deg,#00D1FF,#D64CFF);
+  color:white;
+}
+
+.btn.alt{
+  background:rgba(255,255,255,.055);
+  color:var(--white);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:none;
+}
+
+.btn.alt:hover{
+  background:rgba(255,255,255,.10);
+}
+
+.btn.wa{
+  background:linear-gradient(135deg,#25D366,#00D1FF);
+  color:#04101b;
+}
+
+/* ===== PROFILE CARD ===== */
+.profile-card{
+  position:relative;
+  padding:20px;
+  border-radius:34px;
+  overflow:hidden;
+  background:rgba(8,21,35,.75);
+  border:1px solid var(--border);
+  box-shadow:0 0 55px rgba(198,248,0,.14),0 40px 110px rgba(0,0,0,.62);
+  backdrop-filter:blur(18px);
+  transform-style:preserve-3d;
+}
+
+.profile-card:before{
+  content:"";
+  position:absolute;
+  inset:-45%;
+  background:conic-gradient(transparent,var(--cyan),transparent,var(--purple),transparent);
+  animation:spin 8s linear infinite;
+  opacity:.22;
+}
+
+.profile-card:after{
+  content:"";
+  position:absolute;
+  inset:3px;
+  background:rgba(8,21,35,.91);
+  border-radius:31px;
+  z-index:0;
+}
+
+@keyframes spin{to{rotate:360deg}}
+
+.photo{
+  position:relative;
+  z-index:2;
+  height:500px;
+  border-radius:26px;
+  overflow:hidden;
+  border:1px solid rgba(198,248,0,.32);
+}
+
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+}
+
+.scan{
+  position:absolute;
+  left:0;
+  right:0;
+  height:130px;
+  top:-140px;
+  background:linear-gradient(transparent,rgba(198,248,0,.32),transparent);
+  animation:scan 2.6s linear infinite;
+}
+
+@keyframes scan{to{top:105%}}
+
+.tag{
+  position:absolute;
+  z-index:4;
+  background:rgba(198,248,0,.10);
+  border:1px solid rgba(198,248,0,.34);
+  color:var(--cyan);
+  font-weight:900;
+  padding:8px 13px;
+  border-radius:999px;
+  animation:float 3.5s ease-in-out infinite;
+}
+
+.t1{top:26px;left:18px}
+.t2{top:45%;right:8px;animation-delay:.7s}
+.t3{bottom:100px;left:12px;animation-delay:1.3s}
+
+@keyframes float{50%{transform:translateY(-14px) rotate(5deg)}}
+
+.profile-info{
+  position:relative;
+  z-index:2;
+  padding:18px 4px 4px;
+}
+
+.profile-info h2{
+  font-size:30px;
+  text-align:left;
+  direction:ltr;
+  font-weight:900;
+}
+
+.profile-info p{
+  color:var(--muted);
+  line-height:1.75;
+}
+
+/* ===== COMMON CONTENT ===== */
+.section-head{
+  text-align:center;
+  margin-bottom:36px;
+}
+
+.section-title{
+  font-size:clamp(44px,5vw,72px);
+  line-height:.9;
+  direction:ltr;
+}
+
+.section-title span{
+  display:block;
+  color:rgba(248,251,255,.20);
+}
+
+.section-sub{
+  max-width:740px;
+  margin:14px auto 0;
+  color:var(--muted);
+  line-height:1.9;
+  font-size:17px;
+  font-weight:600;
+}
+
+/* ===== SERVICES ===== */
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.card{
+  position:relative;
+  min-height:380px;
+  border-radius:30px;
+  padding:26px;
+  background:rgba(8,21,35,.75);
+  border:1px solid var(--border);
+  backdrop-filter:blur(18px);
+  overflow:hidden;
+  transition:.35s;
+}
+
+.card:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 12%,rgba(198,248,0,.13),transparent 38%),
+    radial-gradient(circle at 90% 80%,rgba(214,76,255,.10),transparent 35%);
+}
+
+.card:hover{
+  transform:translateY(-14px) rotateX(6deg);
+  border-color:rgba(198,248,0,.42);
+  box-shadow:0 0 45px rgba(198,248,0,.12);
+}
+
+.card>*{position:relative;z-index:2}
+
+.icon-box{
+  width:66px;
+  height:66px;
+  border-radius:22px;
+  display:grid;
+  place-items:center;
+  font-size:30px;
+  margin-bottom:18px;
+  background:rgba(198,248,0,.08);
+  border:1px solid rgba(198,248,0,.22);
+  box-shadow:0 0 24px rgba(198,248,0,.10);
+  animation:float 4s ease-in-out infinite;
+  color:var(--cyan);
+}
+
+.card h3{
+  font-size:24px;
+  margin-bottom:8px;
+}
+
+.price{
+  display:inline-flex;
+  margin:12px 0;
+  padding:8px 12px;
+  border-radius:999px;
+  color:#04101b;
+  background:var(--cyan);
+  font-weight:900;
+  direction:ltr;
+}
+
+.price.premium{
+  background:linear-gradient(135deg,#00D1FF,#D64CFF);
+  color:white;
+}
+
+.card p{
+  color:var(--text);
+  line-height:1.8;
+  margin-bottom:16px;
+  font-weight:600;
+}
+
+.card ul{
+  list-style:none;
+  display:grid;
+  gap:9px;
+  color:var(--muted);
+  font-size:14px;
+  font-weight:600;
+}
+
+.card li:before{
+  content:"✦";
+  color:var(--cyan);
+  margin-left:8px;
+}
+
+/* ===== ABOUT ===== */
+.about-grid,.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+
+.glass,.cta{
+  padding:30px;
+  border-radius:30px;
+  background:rgba(8,21,35,.75);
+  border:1px solid var(--border);
+  backdrop-filter:blur(18px);
+  box-shadow:var(--shadow);
+}
+
+.glass h3{
+  font-size:28px;
+  margin-bottom:14px;
+}
+
+.glass p{
+  color:var(--text);
+  line-height:2;
+  font-size:17px;
+  font-weight:600;
+}
+
+.skills{
+  display:grid;
+  gap:13px;
+}
+
+.skill{
+  display:flex;
+  justify-content:space-between;
+  padding:15px 16px;
+  border-radius:18px;
+  border:1px solid rgba(198,248,0,.18);
+  background:rgba(198,248,0,.055);
+  font-weight:800;
+}
+
+.skill span{
+  color:var(--cyan);
+  font-weight:900;
+}
+
+/* ===== WORKS & REVIEWS ===== */
+.works-grid,.testimonial-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.work-card,.testimonial-card{
+  position:relative;
+  min-height:350px;
+  border-radius:30px;
+  padding:18px;
+  background:rgba(8,21,35,.75);
+  border:1px solid var(--border);
+  backdrop-filter:blur(18px);
+  overflow:hidden;
+  transition:.35s;
+  box-shadow:var(--shadow);
+}
+
+.work-card:hover,.testimonial-card:hover{
+  transform:translateY(-12px);
+  border-color:rgba(198,248,0,.42);
+}
+
+.media-placeholder,.screenshot-placeholder{
+  height:220px;
+  border-radius:22px;
+  border:1px dashed rgba(198,248,0,.35);
+  background:
+    radial-gradient(circle at 50% 35%,rgba(198,248,0,.16),transparent 32%),
+    linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.02));
+  display:grid;
+  place-items:center;
+  text-align:center;
+  color:var(--muted);
+  margin-bottom:18px;
+  line-height:1.7;
+  font-weight:800;
+}
+
+.screenshot-placeholder{
+  border-color:rgba(214,76,255,.35);
+  background:
+    radial-gradient(circle at 50% 35%,rgba(214,76,255,.14),transparent 32%),
+    linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.02));
+}
+
+.media-placeholder i,.screenshot-placeholder i{
+  display:block;
+  font-size:42px;
+  color:var(--cyan);
+  margin-bottom:10px;
+}
+
+.screenshot-placeholder i{color:var(--purple)}
+
+.work-card h3,.testimonial-card h3{
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+.work-card p,.testimonial-card p{
+  color:var(--text);
+  line-height:1.8;
+  font-size:15px;
+  font-weight:600;
+}
+
+.upload-note{
+  margin-top:24px;
+  padding:18px 20px;
+  border-radius:22px;
+  background:rgba(198,248,0,.07);
+  border:1px solid rgba(198,248,0,.18);
+  color:var(--text);
+  line-height:1.8;
+  font-weight:700;
+}
+
+.upload-note code{
+  color:var(--cyan);
+  direction:ltr;
+  display:inline-block;
+}
+
+/* ===== CONTACT ===== */
+.social-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.social-card{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px;
+  border-radius:22px;
+  background:rgba(8,21,35,.75);
+  border:1px solid var(--border);
+  transition:.25s;
+  font-weight:800;
+}
+
+.social-card:hover{
+  background:#F8FBFF;
+  color:#04101b;
+  transform:translateX(-10px);
+}
+
+.social-card strong{font-size:21px}
+.social-card i{font-size:26px}
+
+.social-card:hover .fa-tiktok,
+.social-card:hover .fa-x-twitter{
+  color:#111;
+}
+
+.cta{
+  display:grid;
+  align-content:center;
+  text-align:center;
+  min-height:340px;
+  background:linear-gradient(135deg,rgba(37,211,102,.10),rgba(198,248,0,.08)),rgba(8,21,35,.75);
+}
+
+.cta .big{
+  font-size:60px;
+  margin-bottom:12px;
+  animation:float 3.2s ease-in-out infinite;
+  color:#25D366;
+}
+
+.cta h3{
+  font-size:31px;
+  margin-bottom:12px;
+}
+
+.cta p{
+  color:var(--text);
+  line-height:1.9;
+  margin-bottom:22px;
+  font-weight:600;
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(35px);
+  transition:.75s;
+}
+
+.reveal.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:55px 0 24px;
+  font-weight:700;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:1100px){
+  .service-grid,.works-grid,.testimonial-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:960px){
+  .hero-grid{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .profile-card{
+    max-width:410px;
+    margin:auto;
+    order:-1;
+  }
+
+  .lead{margin-inline:auto}
+  .pills,.actions{justify-content:center}
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .stage-nav,.social-dock{display:none}
+  .section{opacity:1;transform:none}
+  .photo{height:460px}
+}
+
+@media(max-width:720px){
+  .menu{display:block}
+  .top-wa{display:none}
+
+  .nav-links{
+    position:fixed;
+    top:74px;
+    left:14px;
+    right:14px;
+    display:none;
+    flex-direction:column;
+    padding:18px;
+    border-radius:24px;
+    background:rgba(8,21,35,.96);
+    border:1px solid var(--border);
+  }
+
+  .nav.open .nav-links{display:flex}
+  .nav-links a{text-align:center}
+
+  .section{
+    min-height:auto;
+    padding:82px 0;
+  }
+
+  .service-grid,.social-grid,.works-grid,.testimonial-grid{
+    grid-template-columns:1fr;
+  }
+
+  .photo{height:400px}
+  h1{font-size:54px}
+  .ai-head svg{width:140vw}
+}
+
+/* ===== EXTRA 3D MOUSE + BRAIN ENTRY EFFECT ===== */
+.cursor-glow{
+  position:fixed;
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:5;
+  left:0;
+  top:0;
+  opacity:.55;
+  transform:translate(-50%,-50%);
+  background:
+    radial-gradient(circle,rgba(198,248,0,.20),rgba(214,76,255,.10) 38%,transparent 70%);
+  filter:blur(18px);
+  mix-blend-mode:screen;
+}
+
+.brain-depth{
+  position:fixed;
+  inset:-20%;
+  z-index:-24;
+  pointer-events:none;
+  opacity:calc(.20 + var(--stage)*.08);
+  background:
+    radial-gradient(circle at center,transparent 0 12%,rgba(198,248,0,.12) 13%,transparent 18%),
+    radial-gradient(circle at center,transparent 0 24%,rgba(214,76,255,.10) 25%,transparent 30%),
+    radial-gradient(circle at center,transparent 0 38%,rgba(198,248,0,.10) 39%,transparent 43%),
+    repeating-radial-gradient(circle at center,rgba(198,248,0,.12) 0 1px,transparent 2px 54px);
+  transform:
+    scale(calc(1 + var(--scrollDepth,0)*.85))
+    rotate(calc(var(--scrollDepth,0)*38deg));
+  transition:.08s linear;
+}
+
+.brain-gate{
+  position:fixed;
+  left:50%;
+  top:50%;
+  width:420px;
+  height:420px;
+  transform:
+    translate(-50%,-50%)
+    scale(calc(.5 + var(--scrollDepth,0)*2.1));
+  z-index:-23;
+  pointer-events:none;
+  opacity:calc(.16 + var(--stage)*.06);
+  border-radius:50%;
+  border:1px solid rgba(198,248,0,.34);
+  box-shadow:
+    0 0 45px rgba(198,248,0,.22),
+    inset 0 0 70px rgba(214,76,255,.12);
+  background:
+    radial-gradient(circle at center,rgba(198,248,0,.08),transparent 42%),
+    conic-gradient(from 120deg,transparent,rgba(198,248,0,.22),transparent,rgba(214,76,255,.20),transparent);
+  animation:gateSpin 10s linear infinite;
+}
+
+@keyframes gateSpin{to{rotate:360deg}}
+
+.hero-grid,
+.profile-card,
+.card,
+.work-card,
+.testimonial-card,
+.glass,
+.cta{
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+
+.mouse-3d{
+  transition:transform .10s linear;
+}
+
+.section.active .reveal.show{
+  transform:translateY(0) translateZ(24px);
+}
+
+@media(max-width:960px){
+  .cursor-glow,.brain-depth,.brain-gate{display:none}
+}
+
+
+/* ===== FINAL PREMIUM BRAND: PURPLE + LIME ===== */
+:root{
+  --bg:#0C0819; --card:#151125; --card2:#1B1430;
+  --cyan:#7417FE; --cyanSoft:#A855FF; --purple:#C6F800;
+  --white:#FFFFFF; --text:#ECEAF2; --muted:#B9B2C9;
+  --border:rgba(198,248,0,.20);
+  --shadow:0 26px 80px rgba(0,0,0,.48);
+}
+body{
+  font-family:'Tajawal',sans-serif;
+  background:
+    radial-gradient(circle at 18% 20%,rgba(116,23,254,.25),transparent 33%),
+    radial-gradient(circle at 82% 15%,rgba(198,248,0,.10),transparent 26%),
+    radial-gradient(circle at 50% 92%,rgba(83,69,128,.28),transparent 42%),
+    #0C0819;
+}
+#neural{
+  background:
+    radial-gradient(circle at 18% 20%,rgba(116,23,254,.25),transparent 33%),
+    radial-gradient(circle at 82% 15%,rgba(198,248,0,.10),transparent 26%),
+    #0C0819;
+}
+h1,.section-title{font-family:'Archivo Black',sans-serif}
+.gradient{background:linear-gradient(90deg,#FFFFFF,#C6F800,#7417FE);-webkit-background-clip:text;color:transparent}
+.stroke{-webkit-text-stroke:1.25px rgba(255,255,255,.38)}
+.nav,.profile-card,.card,.work-card,.testimonial-card,.glass,.cta,.social-card{background:rgba(21,17,37,.78);border-color:rgba(198,248,0,.18)}
+.nav-links a:hover,.nav-links a.active{background:rgba(198,248,0,.12)}
+.brand img{border-color:rgba(198,248,0,.72);box-shadow:0 0 28px rgba(198,248,0,.26)}
+.brand span,.kicker,.tag,.skill span,.upload-note code{color:#C6F800}
+.top-wa,.btn,.price{background:linear-gradient(135deg,#C6F800,#7417FE);color:#0C0819}
+.btn:hover,.top-wa:hover{background:linear-gradient(135deg,#7417FE,#C6F800);color:#fff}
+.btn.alt{background:rgba(255,255,255,.055);color:#fff}
+.btn.wa{background:linear-gradient(135deg,#25D366,#C6F800);color:#07110A}
+.pill,.kicker,.skill,.upload-note{background:rgba(198,248,0,.06);border-color:rgba(198,248,0,.16)}
+.profile-card:before{background:conic-gradient(transparent,#7417FE,transparent,#C6F800,transparent)}
+.profile-card:after{background:rgba(12,8,25,.92)}
+.photo,.stage-dot,.social-dock,.social-dock a{border-color:rgba(198,248,0,.18)}
+.photo{border-color:rgba(198,248,0,.25)}
+.scan{background:linear-gradient(transparent,rgba(198,248,0,.25),transparent)}
+.card:before{background:radial-gradient(circle at 20% 12%,rgba(116,23,254,.18),transparent 38%),radial-gradient(circle at 90% 80%,rgba(198,248,0,.08),transparent 35%)}
+.icon-box{background:rgba(198,248,0,.07);border-color:rgba(198,248,0,.18);color:#C6F800}
+.card:hover,.work-card:hover,.testimonial-card:hover{border-color:rgba(198,248,0,.38);box-shadow:0 0 45px rgba(198,248,0,.10)}
+.price.premium,.stage-dot.active{background:linear-gradient(135deg,#7417FE,#C6F800);color:#fff}
+.card li:before{color:#C6F800}
+.section{min-height:auto;padding:84px 0}
+.hero{min-height:100vh;padding-top:120px}
+.section-head{margin-bottom:26px}
+.service-grid{gap:14px}
+.about-grid,.contact-grid{gap:16px}
+.works-grid,.testimonial-grid{grid-template-columns:repeat(3,1fr);gap:14px}
+.social-grid{grid-template-columns:1fr;gap:10px}
+.social-card{justify-content:flex-start;gap:18px;padding:15px 20px}
+.social-card i{width:42px;font-size:28px;text-align:center;order:0}
+.social-card strong{font-size:20px;order:1}
+.social-card:hover{background:#FFFFFF;color:#0C0819}
+.cta{min-height:300px}
+.ai-head .outline{stroke:rgba(198,248,0,.45)}
+.ai-head .brain{stroke:rgba(116,23,254,.70)}
+.ai-head .node{fill:#C6F800;filter:drop-shadow(0 0 10px #C6F800)}
+.ai-head .node.purple{fill:#7417FE;filter:drop-shadow(0 0 10px #7417FE)}
+.tunnel{background:repeating-radial-gradient(circle at center,rgba(198,248,0,.12) 0 1px,transparent 2px 78px)}
+.cursor-glow{background:radial-gradient(circle,rgba(198,248,0,.18),rgba(116,23,254,.14) 38%,transparent 70%)}
+.brain-depth{background:radial-gradient(circle at center,transparent 0 12%,rgba(198,248,0,.10) 13%,transparent 18%),radial-gradient(circle at center,transparent 0 24%,rgba(116,23,254,.12) 25%,transparent 30%),radial-gradient(circle at center,transparent 0 38%,rgba(198,248,0,.08) 39%,transparent 43%),repeating-radial-gradient(circle at center,rgba(198,248,0,.10) 0 1px,transparent 2px 54px)}
+.brain-gate{border-color:rgba(198,248,0,.32);box-shadow:0 0 45px rgba(198,248,0,.18),inset 0 0 70px rgba(116,23,254,.14);background:radial-gradient(circle at center,rgba(198,248,0,.07),transparent 42%),conic-gradient(from 120deg,transparent,rgba(198,248,0,.18),transparent,rgba(116,23,254,.25),transparent)}
+.instagram i,.social-card .fa-instagram{color:#E4405F!important}
+.tiktok i,.social-card .fa-tiktok{color:#FFFFFF!important}
+.youtube i,.social-card .fa-youtube{color:#FF0000!important}
+.whatsapp i,.social-card .fa-whatsapp{color:#25D366!important}
+.gmail i,.social-card .fa-envelope{color:#EA4335!important}
+.social-card:hover .fa-tiktok{color:#111!important}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:24px;max-width:650px}
+.hero-stats div{padding:16px 12px;border-radius:18px;background:rgba(21,17,37,.76);border:1px solid rgba(198,248,0,.18);text-align:center;box-shadow:0 16px 50px rgba(0,0,0,.24)}
+.hero-stats b{display:block;font-family:'Archivo Black',sans-serif;font-size:25px;color:#C6F800;direction:ltr}
+.hero-stats span{display:block;color:var(--muted);font-weight:800;font-size:13px;margin-top:4px}
+@media(max-width:1100px){.works-grid,.testimonial-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){.section{padding:64px 0}.hero{padding-top:92px}.social-grid,.works-grid,.testimonial-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:repeat(2,1fr);margin-inline:auto}}
+
+</style>
+</head>
+
+<body>
+<div class="cursor-glow" id="cursorGlow"></div>
+<div class="brain-depth"></div>
+<div class="brain-gate"></div>
+
+<canvas id="neural"></canvas>
+<div class="tunnel"></div>
+
+<div class="ai-head" aria-hidden="true">
+<svg viewBox="0 0 600 600">
+<path class="outline" d="M325 85 C230 80 150 135 128 225 C95 360 170 485 310 505 C440 523 530 440 535 318 C541 195 465 95 325 85 Z"/>
+<path class="outline" d="M180 365 C122 360 95 405 125 448 C152 486 230 495 310 505"/>
+<path class="brain" d="M190 235 C220 175 305 160 330 210 C385 160 470 198 464 275 C522 300 505 398 425 386 C397 455 290 446 285 380 C205 398 160 310 190 235 Z"/>
+<path class="brain" d="M220 240 C270 225 280 275 330 250 C385 225 405 260 450 250"/>
+<path class="brain" d="M205 315 C255 285 295 340 340 310 C382 282 410 330 470 305"/>
+<path class="brain" d="M260 390 C275 345 335 375 360 335 C390 292 440 335 455 382"/>
+<path class="circuit" d="M195 420 H260 V455 H340 V500"/>
+<path class="circuit" d="M420 220 H505 V315 H535"/>
+<circle class="node" cx="220" cy="240" r="7"/>
+<circle class="node purple" cx="330" cy="250" r="7"/>
+<circle class="node" cx="450" cy="250" r="7"/>
+<circle class="node purple" cx="205" cy="315" r="7"/>
+<circle class="node" cx="340" cy="310" r="7"/>
+<circle class="node purple" cx="470" cy="305" r="7"/>
+</svg>
+</div>
+
+<nav class="nav" id="nav">
+<a class="brand" href="#home">
+  <img src="profile.jpg" alt="Hani Yatimi">
+  <div><b>Hani Yatimi</b><span>AI & CONTENT CREATOR</span></div>
+</a>
+
+<div class="nav-links">
+  <a href="#home" class="active">الرئيسية</a>
+  <a href="#services">الخدمات</a>
+  <a href="#about">من أنا</a>
+  <a href="#works">أعمالي</a>
+  <a href="#testimonials">آراء العملاء</a>
+  <a href="#contact">تواصل</a>
+</div>
+
+<a class="top-wa" href="https://wa.me/96500000000" target="_blank"><i class="fa-brands fa-whatsapp"></i> واتساب</a>
+<button class="menu" id="menu">☰</button>
+</nav>
+
+<div class="social-dock">
+<a class="instagram" href="https://www.instagram.com/hani_yatimi" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+<a class="tiktok" href="https://www.tiktok.com/@hani_yatimi" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+<a class="youtube" href="https://www.youtube.com/@haniyatimi" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+<a class="gmail" href="mailto:contact@haniyatimi.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+<a class="whatsapp" href="https://wa.me/96500000000" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+</div>
+
+<div class="stage-nav">
+<a class="stage-dot active" href="#home"><i class="fa-solid fa-house"></i></a><div class="stage-line"></div>
+<a class="stage-dot" href="#services"><i class="fa-solid fa-briefcase"></i></a><div class="stage-line"></div>
+<a class="stage-dot" href="#about"><i class="fa-solid fa-user-astronaut"></i></a><div class="stage-line"></div>
+<a class="stage-dot" href="#works"><i class="fa-solid fa-clapperboard"></i></a><div class="stage-line"></div>
+<a class="stage-dot" href="#testimonials"><i class="fa-solid fa-comments"></i></a><div class="stage-line"></div>
+<a class="stage-dot" href="#contact"><i class="fa-solid fa-paper-plane"></i></a>
+</div>
+
+<main>
+
+<section class="section hero active" id="home" data-stage="0">
+<div class="container hero-grid">
+
+<div id="heroCopy">
+<div class="kicker reveal"><i class="fa-solid fa-bolt"></i> AI & Tech Creator</div>
+<h1 class="reveal"><span class="gradient">AI TECH</span><span class="stroke">CREATOR</span></h1>
+<p class="lead reveal">
+أحوّل الأفكار إلى محتوى يجذب الانتباه ويحقق نتائج. متخصص في محتوى الذكاء الاصطناعي، المونتاج الاحترافي، وتطوير الحسابات على السوشال ميديا.
+</p>
+
+<div class="pills reveal">
+<div class="pill"><i class="fa-solid fa-robot"></i> AI Tools</div>
+<div class="pill"><i class="fa-solid fa-film"></i> مونتاج</div>
+<div class="pill"><i class="fa-solid fa-mobile-screen"></i> إنتاج محتوى</div>
+<div class="pill"><i class="fa-solid fa-rocket"></i> تطوير حسابك</div>
+</div>
+
+<div class="actions reveal">
+<a class="btn" href="#services"><i class="fa-solid fa-layer-group"></i> ابدأ مشروعك</a>
+<a class="btn alt" href="https://www.instagram.com/hani_yatimi" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
+</div>
+
+<div class="hero-stats reveal">
+  <div><b>10K+</b><span>متابع</span></div>
+  <div><b>100+</b><span>فيديو</span></div>
+  <div><b>50+</b><span>عميل محتمل</span></div>
+  <div><b>3+</b><span>سنوات خبرة</span></div>
+</div>
+</div>
+
+<div class="profile-card reveal mouse-3d" id="profileCard">
+<div class="photo">
+<img src="profile.jpg" alt="Hani Yatimi">
+<div class="scan"></div>
+<div class="tag t1">AI</div>
+<div class="tag t2">EDIT</div>
+<div class="tag t3">CONTENT</div>
+</div>
+<div class="profile-info">
+<h2>Hani Yatimi</h2>
+<p>AI & Tech Creator — محتوى، مونتاج، وتسويق بصري للسوشال ميديا</p>
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="section" id="services" data-stage="1">
+<div class="container">
+<div class="section-head reveal">
+<h2 class="section-title">SERVICES <span>الخدمات</span></h2>
+<p class="section-sub">حلول عملية لصناعة محتوى احترافي من الفكرة إلى النشر.</p>
+</div>
+
+<div class="service-grid">
+<article class="card reveal mouse-3d">
+<div class="icon-box"><i class="fa-solid fa-scissors"></i></div>
+<h3>مونتاج فيديو</h3>
+<div class="price">150</div>
+<p>مونتاج احترافي لريلز وتيك توك ويوتيوب شورتس.</p>
+<ul><li>قص وتنظيف الفيديو</li><li>كابشن وترجمة</li><li>مؤثرات وانتقالات</li><li>تسليم جاهز للنشر</li></ul>
+</article>
+
+<article class="card reveal mouse-3d">
+<div class="icon-box"><i class="fa-solid fa-camera-retro"></i></div>
+<h3>إنتاج محتوى</h3>
+<div class="price">300</div>
+<p>من الفكرة إلى فيديو جاهز للنشر بأسلوب مناسب لحسابك.</p>
+<ul><li>فكرة وسكربت</li><li>هوك قوي</li><li>مونتاج كامل</li><li>تحسين شكل المحتوى</li></ul>
+</article>
+
+<article class="card reveal mouse-3d">
+<div class="icon-box"><i class="fa-solid fa-brain"></i></div>
+<h3>إنتاج محتوى AI</h3>
+<div class="price">300</div>
+<p>محتوى مبني على أدوات الذكاء الاصطناعي وفكرة تقنية جذابة.</p>
+<ul><li>بحث أدوات AI</li><li>سكريبت مبسط</li><li>عرض بصري جذاب</li><li>CTA مناسب</li></ul>
+</article>
+
+<article class="card reveal mouse-3d">
+<div class="icon-box"><i class="fa-solid fa-rocket"></i></div>
+<h3>إنتاج محتوى شهري</h3>
+<div class="price premium">300 / شهر</div>
+<p>باقة شهرية للاستمرار في النشر وتطوير الحساب.</p>
+<ul><li>أفكار شهرية</li><li>سكريبتات</li><li>مونتاج ونشر</li><li>متابعة وتحسين الأداء</li></ul>
+</article>
+</div>
+</div>
+</section>
+
+<section class="section" id="about" data-stage="2">
+<div class="container">
+<div class="section-head reveal">
+<h2 class="section-title">ABOUT <span>من أنا</span></h2>
+<p class="section-sub">صانع محتوى عربي يشرح الذكاء الاصطناعي بطريقة سهلة وجذابة.</p>
+</div>
+
+<div class="about-grid">
+<div class="glass reveal mouse-3d">
+<h3>قصتي</h3>
+<p>أعمل على تبسيط الذكاء الاصطناعي والتقنية، وأساعد أصحاب المشاريع وصناع المحتوى على الظهور بشكل احترافي من خلال مونتاج ذكي وأفكار محتوى واضحة.</p>
+</div>
+
+<div class="glass reveal mouse-3d">
+<h3>مهاراتي</h3>
+<div class="skills">
+<div class="skill"><b>مونتاج فيديوهات قصيرة</b><span>95%</span></div>
+<div class="skill"><b>كتابة سكربت وهوك</b><span>90%</span></div>
+<div class="skill"><b>استخدام أدوات AI</b><span>92%</span></div>
+<div class="skill"><b>إنتاج محتوى سوشال</b><span>88%</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="works" data-stage="3">
+<div class="container">
+<div class="section-head reveal">
+<h2 class="section-title">WORKS <span>أعمالي</span></h2>
+<p class="section-sub">قسم مخصص للفيديوهات التي ستضيفها لاحقاً: قبل وبعد، مونتاج، ريلز، وأمثلة من شغلك.</p>
+</div>
+
+<div class="works-grid">
+<article class="work-card reveal mouse-3d"><div class="media-placeholder"><div><i class="fa-solid fa-video"></i>مكان فيديو قبل / بعد</div></div><h3>Before / After</h3><p>ضع هنا فيديو يوضح الفرق بين المادة الخام والنتيجة النهائية بعد المونتاج.</p></article>
+<article class="work-card reveal mouse-3d"><div class="media-placeholder"><div><i class="fa-solid fa-clapperboard"></i>مكان فيديو ريلز</div></div><h3>Reels Editing</h3><p>ضع هنا مثال لفيديو قصير قمت بمونتاجه للسوشال ميديا.</p></article>
+<article class="work-card reveal mouse-3d"><div class="media-placeholder"><div><i class="fa-solid fa-wand-magic-sparkles"></i>مكان عمل مميز</div></div><h3>Creative Project</h3><p>ضع هنا أفضل عمل يبين أسلوبك البصري وقدرتك على صناعة محتوى جذاب.</p></article>
+<article class="work-card reveal mouse-3d"><div class="media-placeholder"><div><i class="fa-solid fa-mobile-screen"></i>مكان فيديو قصير</div></div><h3>Short Content</h3><p>ضع هنا فيديو قصير يوضح أسلوبك في جذب الانتباه من أول ثواني.</p></article>
+<article class="work-card reveal mouse-3d"><div class="media-placeholder"><div><i class="fa-solid fa-robot"></i>مكان محتوى AI</div></div><h3>AI Content</h3><p>ضع هنا فيديو عن أداة ذكاء اصطناعي أو شرح تقني بطريقة مبسطة.</p></article>
+<article class="work-card reveal mouse-3d"><div class="media-placeholder"><div><i class="fa-solid fa-chart-line"></i>نتيجة / نمو</div></div><h3>Growth Result</h3><p>ضع هنا مثال يوضح نتيجة محتوى أو تطور حساب بعد العمل عليه.</p></article>
+</div>
+
+<div class="upload-note reveal">
+لاحقاً ارفع فيديوهاتك بأسماء مثل <code>work-1.mp4</code> و <code>work-2.mp4</code> واستبدل أماكن الـ Placeholder بها.
+</div>
+</div>
+</section>
+
+<section class="section" id="testimonials" data-stage="4">
+<div class="container">
+<div class="section-head reveal">
+<h2 class="section-title">CLIENTS <span>آراء العملاء</span></h2>
+<p class="section-sub">قسم مخصص لسكرين شوت رسائل العملاء والتقييمات التي ستضيفها لاحقاً.</p>
+</div>
+
+<div class="testimonial-grid">
+<article class="testimonial-card reveal mouse-3d"><div class="screenshot-placeholder"><div><i class="fa-solid fa-message"></i>سكرين شوت رأي عميل</div></div><h3>رأي عميل</h3><p>ضع هنا صورة رسالة عميل يشكر فيها على الخدمة أو النتيجة.</p></article>
+<article class="testimonial-card reveal mouse-3d"><div class="screenshot-placeholder"><div><i class="fa-solid fa-star"></i>سكرين شوت تقييم</div></div><h3>رأي عميل</h3><p>ضع هنا تقييم أو رسالة توضّح رضا العميل عن المونتاج أو المحتوى.</p></article>
+<article class="testimonial-card reveal mouse-3d"><div class="screenshot-placeholder"><div><i class="fa-solid fa-comments"></i>رسالة واتساب / إنستغرام</div></div><h3>رأي عميل</h3><p>ضع هنا محادثة قصيرة تثبت جودة الخدمة وتجربة العميل.</p></article>
+<article class="testimonial-card reveal mouse-3d"><div class="screenshot-placeholder"><div><i class="fa-solid fa-thumbs-up"></i>سكرين شوت نتيجة</div></div><h3>رأي عميل</h3><p>ضع هنا رسالة عميل بعد استلام العمل النهائي.</p></article>
+<article class="testimonial-card reveal mouse-3d"><div class="screenshot-placeholder"><div><i class="fa-solid fa-heart"></i>تجربة عميل</div></div><h3>رأي عميل</h3><p>ضع هنا رأي يوضح سرعة التسليم وجودة التواصل.</p></article>
+<article class="testimonial-card reveal mouse-3d"><div class="screenshot-placeholder"><div><i class="fa-solid fa-award"></i>تقييم خدمة</div></div><h3>رأي عميل</h3><p>ضع هنا أي شهادة أو سكرين شوت يدعم ثقة الزوار بخدماتك.</p></article>
+</div>
+
+<div class="upload-note reveal">
+لاحقاً ارفع الصور بأسماء مثل <code>review-1.jpg</code> و <code>review-2.jpg</code> واستبدل أماكن الصور بها.
+</div>
+</div>
+</section>
+
+<section class="section" id="contact" data-stage="5">
+<div class="container">
+<div class="section-head reveal">
+<h2 class="section-title">CONTACT <span>تواصل</span></h2>
+<p class="section-sub">كل روابط السوشال ميديا + كارد مباشر للواتساب.</p>
+</div>
+
+<div class="contact-grid">
+<div class="social-grid reveal">
+<a class="social-card" href="https://www.instagram.com/hani_yatimi" target="_blank"><i class="fa-brands fa-instagram"></i><strong>Instagram</strong></a>
+<a class="social-card" href="https://www.tiktok.com/@hani_yatimi" target="_blank"><i class="fa-brands fa-tiktok"></i><strong>TikTok</strong></a>
+<a class="social-card" href="https://www.youtube.com/@haniyatimi" target="_blank"><i class="fa-brands fa-youtube"></i><strong>YouTube</strong></a>
+<a class="social-card" href="mailto:contact@haniyatimi.com"><i class="fa-solid fa-envelope"></i><strong>Email</strong></a>
+</div>
+
+<div class="cta reveal mouse-3d">
+<div class="big"><i class="fa-brands fa-whatsapp"></i></div>
+<h3>ابدأ مشروعك الآن</h3>
+<p>راسلني على واتساب، اشرح لي هدفك، وسأقترح عليك أفضل خدمة تناسبك.</p>
+<a class="btn wa" href="https://wa.me/96500000000" target="_blank"><i class="fa-brands fa-whatsapp"></i> تواصل على واتساب</a>
+</div>
+</div>
+</div>
+</section>
+
+<footer>© 2026 Hani Yatimi — AI Tech Creator</footer>
+</main>
+
+<script>
+const nav=document.getElementById('nav');
+document.getElementById('menu').onclick=()=>nav.classList.toggle('open');
+document.querySelectorAll('.nav-links a').forEach(a=>a.onclick=()=>nav.classList.remove('open'));
+
+const canvas=document.getElementById('neural'),ctx=canvas.getContext('2d');
+let W,H,nodes=[],mouse={x:null,y:null};
+
+function init(){
+  W=canvas.width=innerWidth;
+  H=canvas.height=innerHeight;
+  nodes=[];
+  let count=innerWidth<700?85:165;
+  for(let i=0;i<count;i++){
+    nodes.push({
+      x:Math.random()*W,
+      y:Math.random()*H,
+      vx:(Math.random()-.5)*.85,
+      vy:(Math.random()-.5)*.85,
+      r:Math.random()*2.5+1
+    });
+  }
+}
+init();
+onresize=init;
+onmousemove=e=>{mouse.x=e.clientX;mouse.y=e.clientY};
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  let st=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--stage'))||0;
+  let zoom=1+st*.24+scrollY/3400;
+
+  ctx.save();
+  ctx.translate(W/2,H/2);
+  ctx.scale(zoom,zoom);
+  ctx.translate(-W/2,-H/2);
+
+  for(let i=0;i<nodes.length;i++){
+    let a=nodes[i];
+    a.x+=a.vx;
+    a.y+=a.vy;
+
+    if(a.x<0||a.x>W)a.vx*=-1;
+    if(a.y<0||a.y>H)a.vy*=-1;
+
+    ctx.beginPath();
+    ctx.arc(a.x,a.y,a.r,0,Math.PI*2);
+    ctx.fillStyle=i%5?'#C6F800':'#7417FE';
+    ctx.fill();
+
+    for(let j=i+1;j<nodes.length;j++){
+      let b=nodes[j];
+      let d=Math.hypot(a.x-b.x,a.y-b.y);
+
+      if(d<155){
+        ctx.beginPath();
+        ctx.moveTo(a.x,a.y);
+        ctx.lineTo(b.x,b.y);
+        ctx.strokeStyle=`rgba(198,248,0,${(1-d/155)*.36})`;
+        ctx.lineWidth=.8;
+        ctx.stroke();
+      }
+    }
+
+    if(mouse.x!==null){
+      let d=Math.hypot(a.x-mouse.x,a.y-mouse.y);
+
+      if(d<220){
+        ctx.beginPath();
+        ctx.moveTo(a.x,a.y);
+        ctx.lineTo(mouse.x,mouse.y);
+        ctx.strokeStyle='rgba(116,23,254,.34)';
+        ctx.lineWidth=1.1;
+        ctx.stroke();
+      }
+    }
+  }
+
+  ctx.restore();
+  requestAnimationFrame(draw);
+}
+draw();
+
+
+const profileCard=document.getElementById('profileCard');
+const heroCopy=document.getElementById('heroCopy');
+const cursorGlow=document.getElementById('cursorGlow');
+const mouse3d=[...document.querySelectorAll('.mouse-3d')];
+
+document.addEventListener('mousemove',e=>{
+  if(cursorGlow){
+    cursorGlow.style.left=e.clientX+'px';
+    cursorGlow.style.top=e.clientY+'px';
+  }
+
+  if(innerWidth<900)return;
+
+  const cx=innerWidth/2;
+  const cy=innerHeight/2;
+  const mx=(e.clientX-cx)/cx;
+  const my=(e.clientY-cy)/cy;
+
+  if(profileCard){
+    profileCard.style.transform=
+      `rotateY(${mx*13}deg) rotateX(${-my*13}deg) translateZ(34px)`;
+  }
+
+  if(heroCopy){
+    heroCopy.style.transform=
+      `translate3d(${mx*18}px,${my*10}px,42px) rotateY(${mx*4}deg)`;
+  }
+
+  mouse3d.forEach((el,index)=>{
+    if(el===profileCard)return;
+    const rect=el.getBoundingClientRect();
+    const ex=e.clientX-(rect.left+rect.width/2);
+    const ey=e.clientY-(rect.top+rect.height/2);
+    const dist=Math.hypot(ex,ey);
+    if(dist<520){
+      const rx=(-ey/rect.height)*7;
+      const ry=(ex/rect.width)*7;
+      el.style.transform=`perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-8px)`;
+    }else{
+      el.style.transform='';
+    }
+  });
+});
+
+document.addEventListener('mouseleave',()=>{
+  if(profileCard)profileCard.style.transform='';
+  if(heroCopy)heroCopy.style.transform='';
+  mouse3d.forEach(el=>el.style.transform='');
+});
+
+const sections=[...document.querySelectorAll('.section')];
+const dots=[...document.querySelectorAll('.stage-dot')];
+const navLinks=[...document.querySelectorAll('.nav-links a')];
+
+function scrollFX(){
+  let current=0;
+  let currentId='home';
+
+  sections.forEach(sec=>{
+    let r=sec.getBoundingClientRect();
+    let active=r.top<innerHeight*.55 && r.bottom>innerHeight*.25;
+
+    sec.classList.toggle('active',active);
+
+    if(active){
+      current=+sec.dataset.stage;
+      currentId=sec.id;
+    }
+  });
+
+  const maxScroll=document.documentElement.scrollHeight-innerHeight;
+  const depth=maxScroll>0 ? scrollY/maxScroll : 0;
+
+  document.documentElement.style.setProperty('--stage',current);
+  document.documentElement.style.setProperty('--scrollDepth',depth.toFixed(4));
+
+  dots.forEach((d,i)=>d.classList.toggle('active',i===current));
+  navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+currentId));
+}
+
+onscroll=scrollFX;
+scrollFX();
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting)entry.target.classList.add('show');
+  });
+},{threshold:.12});
+
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+
+</body>
+</html>
