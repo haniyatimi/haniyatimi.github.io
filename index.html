@@ -3,24 +3,27 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Hani Yatimi | AI & Content Creator</title>
+<title>هاني يتيمي | الذكاء الاصطناعي والتكنولوجيا</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
+<!-- الخطوط المعتمدة في دليل الهوية: Alexandria للعربية و Sora للإنجليزية -->
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800;900&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
+/* لوحة ألوان هوية HANI AI & TECH المطابقة لدليل العلامة */
 :root{
-  --white:#FFFFFF;
-  --accent:#D4FE08;
-  --blue:#191D32;
-  --black:#000000;
-  --text:#191D32;
-  --muted:#677080;
-  --soft:#F6F7F4;
-  --line:rgba(25,29,50,.12);
-  --shadow:0 24px 70px rgba(25,29,50,.12);
+  --midnight:#090810;    /* MIDNIGHT #090810 - BACKGROUND */
+  --surface:#11101C;     /* خلفية البطاقات */
+  --surface-2:#181626;   /* خلفية البطاقات عند التمرير */
+  --violet:#885CF6;      /* VIOLET #885CF6 - PRIMARY */
+  --cyan:#00C8FF;        /* CYAN #00C8FF - ACCENT */
+  --white:#FFFFFF;       /* WHITE #FFFFFF - HEADLINES */
+  --mist:#BFC3CC;        /* MIST #BFC3CC - BODY TEXT */
+  --line:rgba(136,92,246,.24);
+  --shadow:0 24px 70px rgba(0,0,0,.72);
+  --glow:0 16px 35px rgba(136,92,246,.35);
   --radius:30px;
   --mx:50vw;
   --my:50vh;
@@ -29,17 +32,18 @@
 html{scroll-behavior:smooth}
 
 body{
-  font-family:'Tajawal',sans-serif;
+  font-family:'Alexandria','Sora',sans-serif;
   background:
-    radial-gradient(circle at 20% 8%,rgba(212,254,8,.28),transparent 24%),
-    radial-gradient(circle at 86% 14%,rgba(25,29,50,.08),transparent 28%),
-    var(--white);
-  color:var(--text);
+    radial-gradient(circle at 18% 10%,rgba(0,200,255,.16),transparent 28%),
+    radial-gradient(circle at 85% 15%,rgba(136,92,246,.22),transparent 30%),
+    var(--midnight);
+  color:var(--white);
   overflow-x:hidden;
 }
 
 body.en{
   direction:ltr;
+  font-family:'Sora','Alexandria',sans-serif;
 }
 
 a{text-decoration:none;color:inherit}
@@ -50,7 +54,7 @@ a{text-decoration:none;color:inherit}
   width:100vw;
   height:100vh;
   z-index:-10;
-  opacity:.55;
+  opacity:.65;
   pointer-events:none;
   transform-origin:var(--mx) var(--my);
   transform:scale(calc(1 + var(--scrollDepth,0)*.55));
@@ -60,15 +64,15 @@ a{text-decoration:none;color:inherit}
   position:fixed;
   left:0;
   top:0;
-  width:280px;
-  height:280px;
+  width:320px;
+  height:320px;
   transform:translate(-50%,-50%);
   border-radius:50%;
   pointer-events:none;
   z-index:1;
-  opacity:.55;
-  filter:blur(20px);
-  background:radial-gradient(circle,rgba(212,254,8,.38),rgba(25,29,50,.08) 42%,transparent 72%);
+  opacity:.42;
+  filter:blur(28px);
+  background:radial-gradient(circle,rgba(0,200,255,.32),rgba(136,92,246,.22) 45%,transparent 72%);
 }
 
 .brain-bg{
@@ -78,7 +82,7 @@ a{text-decoration:none;color:inherit}
   display:grid;
   place-items:center;
   pointer-events:none;
-  opacity:.24;
+  opacity:.26;
   transform:
     translate(
       calc((var(--mx) - 50vw) * -0.025),
@@ -90,20 +94,20 @@ a{text-decoration:none;color:inherit}
 
 .brain-bg svg{
   width:min(980px,108vw);
-  filter:drop-shadow(0 0 30px rgba(212,254,8,.22));
+  filter:drop-shadow(0 0 35px rgba(136,92,246,.35));
 }
 
 .brain-bg .head{
   fill:none;
-  stroke:var(--blue);
+  stroke:var(--violet);
   stroke-width:2.2;
-  opacity:.48;
+  opacity:.45;
 }
 
 .brain-bg .brain{
   fill:none;
-  stroke:var(--accent);
-  stroke-width:4;
+  stroke:var(--cyan);
+  stroke-width:3.5;
   stroke-linecap:round;
   stroke-linejoin:round;
   stroke-dasharray:13 12;
@@ -112,21 +116,21 @@ a{text-decoration:none;color:inherit}
 
 .brain-bg .wire{
   fill:none;
-  stroke:var(--blue);
-  stroke-width:1.5;
-  opacity:.45;
+  stroke:var(--violet);
+  stroke-width:1.6;
+  opacity:.55;
   stroke-dasharray:5 9;
   animation:dash 10s linear infinite reverse;
 }
 
 .brain-bg .node{
-  fill:var(--accent);
-  filter:drop-shadow(0 0 10px var(--accent));
+  fill:var(--cyan);
+  filter:drop-shadow(0 0 12px var(--cyan));
   animation:pulse 2.4s ease-in-out infinite;
 }
 
 @keyframes dash{to{stroke-dashoffset:-260}}
-@keyframes pulse{50%{opacity:.45;transform:scale(.8)}}
+@keyframes pulse{50%{opacity:.4;transform:scale(.8)}}
 
 .container{
   width:min(1060px,calc(100% - 34px));
@@ -155,8 +159,8 @@ a{text-decoration:none;color:inherit}
   justify-content:space-between;
   align-items:center;
   gap:14px;
-  padding:12px 14px;
-  background:rgba(255,255,255,.88);
+  padding:12px 16px;
+  background:rgba(17,16,28,.85);
   border:1px solid var(--line);
   border-radius:28px;
   box-shadow:var(--shadow);
@@ -168,6 +172,7 @@ a{text-decoration:none;color:inherit}
   align-items:center;
   gap:12px;
   direction:ltr;
+  font-family:'Sora',sans-serif;
 }
 
 .logo{
@@ -176,23 +181,25 @@ a{text-decoration:none;color:inherit}
   border-radius:17px;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,var(--accent),#B9EA00);
-  color:var(--blue);
-  font-family:'Archivo Black',sans-serif;
-  box-shadow:0 16px 35px rgba(212,254,8,.38);
+  background:linear-gradient(135deg,var(--violet),var(--cyan));
+  color:var(--white);
+  font-family:'Sora',sans-serif;
+  font-weight:800;
+  font-size:18px;
+  box-shadow:0 12px 30px rgba(0,200,255,.3);
 }
 
 .brand b{
   display:block;
-  font-weight:900;
-  color:var(--blue);
+  font-weight:800;
+  color:var(--white);
 }
 
 .brand span{
   display:block;
   font-size:12px;
-  font-weight:900;
-  color:#88A600;
+  font-weight:600;
+  color:var(--cyan);
 }
 
 .nav-actions{
@@ -203,18 +210,19 @@ a{text-decoration:none;color:inherit}
 
 .lang-btn,.nav-link{
   border:1px solid var(--line);
-  background:#fff;
-  color:var(--blue);
-  padding:10px 14px;
+  background:var(--surface-2);
+  color:var(--white);
+  padding:10px 16px;
   border-radius:999px;
   cursor:pointer;
-  font-family:'Tajawal',sans-serif;
-  font-weight:900;
+  font-family:inherit;
+  font-weight:700;
   transition:.25s;
 }
 
 .lang-btn:hover,.nav-link:hover{
-  background:var(--accent);
+  background:linear-gradient(135deg,var(--violet),var(--cyan));
+  color:var(--white);
   border-color:transparent;
 }
 
@@ -228,39 +236,42 @@ a{text-decoration:none;color:inherit}
   display:inline-flex;
   align-items:center;
   gap:9px;
-  padding:10px 18px;
+  padding:10px 20px;
   border-radius:999px;
-  background:#fff;
+  background:var(--surface);
   border:1px solid var(--line);
-  box-shadow:0 12px 35px rgba(25,29,50,.08);
-  font-weight:900;
-  color:var(--blue);
+  box-shadow:0 12px 35px rgba(0,0,0,.45);
+  font-weight:700;
+  color:var(--cyan);
 }
 
 h1{
-  max-width:900px;
-  font-size:clamp(46px,8vw,96px);
-  line-height:.95;
+  max-width:920px;
+  font-size:clamp(38px,7vw,82px);
+  line-height:1.1;
   font-weight:900;
-  color:var(--blue);
-  letter-spacing:-1.5px;
+  color:var(--white);
+  letter-spacing:-0.5px;
 }
 
 .en h1{
-  font-family:'Archivo Black',sans-serif;
-  letter-spacing:-2px;
+  font-family:'Sora',sans-serif;
+  font-weight:800;
+  letter-spacing:-1.5px;
 }
 
 .accent{
-  color:#A7D600;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
 .lead{
-  max-width:720px;
-  color:#4B5363;
-  line-height:2;
-  font-size:20px;
-  font-weight:700;
+  max-width:740px;
+  color:var(--mist);
+  line-height:1.95;
+  font-size:19px;
+  font-weight:400;
 }
 
 .actions{
@@ -275,31 +286,38 @@ h1{
   align-items:center;
   justify-content:center;
   gap:10px;
-  padding:15px 25px;
+  padding:15px 28px;
   border-radius:999px;
-  background:linear-gradient(135deg,var(--accent),#A8D900);
-  color:var(--blue);
-  font-weight:900;
-  border:1px solid rgba(25,29,50,.08);
-  box-shadow:0 18px 35px rgba(212,254,8,.38);
+  background:linear-gradient(135deg,var(--violet),var(--cyan));
+  color:var(--white);
+  font-weight:800;
+  border:none;
+  box-shadow:var(--glow);
   transition:.25s;
 }
 
 .btn:hover{
   transform:translateY(-5px);
+  box-shadow:0 20px 45px rgba(0,200,255,.4);
 }
 
 .btn.dark{
-  background:var(--blue);
-  color:#fff;
-  box-shadow:0 18px 35px rgba(25,29,50,.18);
+  background:var(--surface);
+  color:var(--white);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+}
+
+.btn.dark:hover{
+  border-color:var(--cyan);
+  background:var(--surface-2);
 }
 
 .profile{
   width:min(430px,92vw);
-  padding:17px;
+  padding:16px;
   border-radius:42px;
-  background:#fff;
+  background:var(--surface);
   border:1px solid var(--line);
   box-shadow:var(--shadow);
   animation:floatCard 4s ease-in-out infinite;
@@ -311,7 +329,7 @@ h1{
   height:510px;
   overflow:hidden;
   border-radius:32px;
-  background:linear-gradient(135deg,var(--accent),#B9EA00);
+  background:linear-gradient(135deg,#071A2B,var(--midnight) 50%,#21113B);
 }
 
 .profile img{
@@ -330,9 +348,13 @@ h1{
   bottom:20px;
   padding:13px 18px;
   border-radius:999px;
-  background:rgba(25,29,50,.88);
-  color:#fff;
-  font-weight:900;
+  background:rgba(9,8,16,.88);
+  border:1px solid rgba(0,200,255,.35);
+  backdrop-filter:blur(10px);
+  color:var(--cyan);
+  font-family:'Sora',sans-serif;
+  font-weight:700;
+  letter-spacing:.5px;
 }
 
 @keyframes floatCard{
@@ -350,7 +372,7 @@ h1{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   overflow:hidden;
-  background:#fff;
+  background:var(--surface);
   border:1px solid var(--line);
   border-radius:28px;
   box-shadow:var(--shadow);
@@ -370,47 +392,55 @@ h1{
   place-items:center;
   margin:0 auto 10px;
   border-radius:50%;
-  background:var(--accent);
-  color:var(--blue);
+  background:rgba(136,92,246,.18);
+  border:1px solid rgba(136,92,246,.42);
+  color:var(--cyan);
   font-size:20px;
 }
 
 .stat b{
   display:block;
+  font-family:'Sora',sans-serif;
   font-size:28px;
-  font-weight:900;
-  color:var(--blue);
+  font-weight:800;
+  color:var(--white);
   direction:ltr;
 }
 
 .stat span{
   display:block;
-  color:var(--muted);
-  font-weight:800;
+  color:var(--mist);
+  font-weight:500;
+  margin-top:4px;
 }
 
 .section-title{
-  font-size:clamp(32px,5vw,58px);
-  color:var(--blue);
+  font-size:clamp(30px,5vw,52px);
+  color:var(--white);
   font-weight:900;
   margin-bottom:10px;
 }
 
+.en .section-title{
+  font-family:'Sora',sans-serif;
+  font-weight:800;
+}
+
 .section-title:after{
   content:"";
-  width:70px;
+  width:75px;
   height:5px;
   display:block;
-  margin:13px auto 0;
+  margin:14px auto 0;
   border-radius:999px;
-  background:var(--accent);
+  background:linear-gradient(90deg,var(--violet),var(--cyan));
 }
 
 .section-sub{
   max-width:680px;
-  margin:0 auto 28px;
-  color:var(--muted);
-  font-weight:700;
+  margin:0 auto 32px;
+  color:var(--mist);
+  font-weight:400;
   line-height:1.9;
 }
 
@@ -428,7 +458,7 @@ h1{
 }
 
 .card,.work,.testimonial,.contact-panel{
-  background:#fff;
+  background:var(--surface);
   border:1px solid var(--line);
   border-radius:28px;
   box-shadow:var(--shadow);
@@ -438,6 +468,8 @@ h1{
 
 .card:hover,.work:hover,.testimonial:hover,.contact-panel:hover{
   transform:translateY(-8px);
+  border-color:var(--cyan);
+  background:var(--surface-2);
 }
 
 .icon{
@@ -447,21 +479,23 @@ h1{
   border-radius:50%;
   display:grid;
   place-items:center;
-  background:var(--accent);
-  color:var(--blue);
+  background:linear-gradient(135deg,rgba(136,92,246,.25),rgba(0,200,255,.25));
+  border:1px solid rgba(0,200,255,.35);
+  color:var(--cyan);
   font-size:26px;
 }
 
 .card h3,.work h3{
-  font-size:22px;
-  color:var(--blue);
+  font-size:21px;
+  color:var(--white);
+  font-weight:800;
   margin-bottom:10px;
 }
 
 .card p,.work p,.testimonial p{
-  color:var(--muted);
+  color:var(--mist);
   line-height:1.85;
-  font-weight:700;
+  font-weight:400;
 }
 
 .work{
@@ -473,11 +507,19 @@ h1{
   height:210px;
   border-radius:21px;
   background:
-    radial-gradient(circle at 50% 50%,rgba(212,254,8,.35),transparent 40%),
-    linear-gradient(135deg,#070707,var(--blue));
+    radial-gradient(circle at 50% 50%,rgba(0,200,255,.26),transparent 45%),
+    linear-gradient(135deg,var(--midnight),#1E1838);
+  border:1px solid rgba(136,92,246,.25);
   display:grid;
   place-items:center;
   overflow:hidden;
+  position:relative;
+}
+
+.media img, .media video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
 .play{
@@ -486,8 +528,9 @@ h1{
   border-radius:50%;
   display:grid;
   place-items:center;
-  background:#fff;
-  color:var(--blue);
+  background:linear-gradient(135deg,var(--violet),var(--cyan));
+  color:var(--white);
+  box-shadow:0 0 25px rgba(0,200,255,.5);
 }
 
 .work h3,.work p{
@@ -497,9 +540,21 @@ h1{
 .work h3{margin-top:15px}
 
 .stars{
-  color:#9BC900;
+  color:var(--cyan);
   font-size:20px;
   margin-bottom:16px;
+}
+
+.screenshot-slot{
+  width:100%;
+  border-radius:16px;
+  overflow:hidden;
+  margin-bottom:14px;
+  border:1px solid var(--line);
+}
+.screenshot-slot img{
+  width:100%;
+  display:block;
 }
 
 .client{
@@ -516,9 +571,10 @@ h1{
   border-radius:50%;
   display:grid;
   place-items:center;
-  background:var(--accent);
-  color:var(--blue);
-  font-weight:900;
+  background:linear-gradient(135deg,var(--violet),var(--cyan));
+  color:var(--white);
+  font-family:'Sora',sans-serif;
+  font-weight:800;
 }
 
 .contact-list{
@@ -533,19 +589,20 @@ h1{
   align-items:center;
   gap:16px;
   text-align:start;
-  background:#fff;
+  background:var(--surface);
   border:1px solid var(--line);
   border-radius:23px;
   padding:18px 22px;
-  box-shadow:0 14px 40px rgba(25,29,50,.07);
-  font-size:20px;
-  font-weight:900;
+  box-shadow:0 14px 40px rgba(0,0,0,.35);
+  font-size:19px;
+  font-weight:700;
   transition:.25s;
 }
 
 .social:hover{
   transform:translateX(-8px);
-  background:#FCFFF2;
+  background:var(--surface-2);
+  border-color:var(--cyan);
 }
 
 .en .social:hover{
@@ -555,19 +612,20 @@ h1{
 .social i{
   width:44px;
   text-align:center;
-  font-size:30px;
+  font-size:28px;
 }
 
 .fa-instagram{color:#E4405F}
-.fa-tiktok{color:#111}
+.fa-facebook{color:#1877F2}
+.fa-tiktok{color:#00C8FF}
 .fa-youtube{color:#FF0000}
-.fa-envelope{color:#111}
+.fa-envelope{color:#885CF6}
 .fa-whatsapp{color:#25D366}
 
 .whatsapp-box{
   width:min(840px,100%);
   margin:18px auto 0;
-  background:#fff;
+  background:var(--surface);
   border:1px solid var(--line);
   border-radius:30px;
   box-shadow:var(--shadow);
@@ -581,23 +639,26 @@ h1{
 }
 
 .whatsapp-box h3{
-  font-size:30px;
-  color:var(--blue);
+  font-size:28px;
+  color:var(--white);
+  font-weight:900;
   margin-bottom:10px;
 }
 
 .whatsapp-box p{
-  color:var(--muted);
+  color:var(--mist);
   line-height:1.9;
-  font-weight:700;
-  margin-bottom:20px;
+  font-weight:400;
+  margin-bottom:22px;
 }
 
 footer{
   padding:36px 0;
   text-align:center;
-  color:var(--muted);
-  font-weight:800;
+  color:var(--mist);
+  font-weight:500;
+  border-top:1px solid var(--line);
+  margin-top:40px;
 }
 
 .reveal{
@@ -628,7 +689,7 @@ footer{
   .hero{padding-top:108px}
   .grid.services,.grid.works,.grid.testimonials,.stats{grid-template-columns:1fr}
   .profile-inner{height:430px}
-  h1{font-size:46px}
+  h1{font-size:38px}
   .brand b{font-size:15px}
 }
 </style>
@@ -660,7 +721,7 @@ footer{
     <div class="logo">HY</div>
     <div>
       <b>Hani Yatimi</b>
-      <span>AI & Content Creator</span>
+      <span>AI & Tech</span>
     </div>
   </a>
 
@@ -673,15 +734,15 @@ footer{
 <main>
 <section class="section hero" id="home">
   <div class="container hero-card">
-    <div class="kicker reveal" data-ar="مرحباً، أنا هاني اليتيمي 👋" data-en="Hi, I'm Hani Yatimi 👋">مرحباً، أنا هاني اليتيمي 👋</div>
+    <div class="kicker reveal" data-ar="هاني يتيمي | الذكاء الاصطناعي والتكنولوجيا 👋" data-en="Hani Yatimi | AI & Tech 👋">هاني يتيمي | الذكاء الاصطناعي والتكنولوجيا 👋</div>
 
     <h1 class="reveal">
-      <span data-ar="أصنع محتوى" data-en="I create content">أصنع محتوى</span>
-      <span class="accent" data-ar="يحقق نتائج حقيقية." data-en="that drives real results.">يحقق نتائج حقيقية.</span>
+      <span data-ar="نرصد تحولات" data-en="Tracking the shifts in">نرصد تحولات</span>
+      <span class="accent" data-ar="الذكاء الاصطناعي والتقنية." data-en="AI & modern technology.">الذكاء الاصطناعي والتقنية.</span>
     </h1>
 
-    <p class="lead reveal" data-ar="متخصص في الذكاء الاصطناعي، صناعة المحتوى، المونتاج الاحترافي وتطوير الحسابات على السوشال ميديا بشكل واضح ومميز." data-en="I specialize in AI content, professional video editing, and building stronger social media presence with a clean and premium visual style.">
-      متخصص في الذكاء الاصطناعي، صناعة المحتوى، المونتاج الاحترافي وتطوير الحسابات على السوشال ميديا بشكل واضح ومميز.
+    <p class="lead reveal" data-ar="أدوات ذكية ترفع إنتاجك، مراجعات المعدات بحياد، وصناعة محتوى تقني واحترافي يبني لك حضوراً رقمياً قوياً." data-en="Smart tools to boost your productivity, unbiased gear reviews, and professional AI content creation to build a strong digital presence.">
+      أدوات ذكية ترفع إنتاجك، مراجعات المعدات بحياد، وصناعة محتوى تقني واحترافي يبني لك حضوراً رقمياً قوياً.
     </p>
 
     <div class="actions reveal">
@@ -691,15 +752,18 @@ footer{
 
     <div class="profile reveal mouse-3d" id="profileCard">
       <div class="profile-inner">
+        <!-- ======================================================== -->
+        <!-- [1] صورتك الشخصية: ضع صورتك الرسمية بقميص HY باسم profile.jpg -->
+        <!-- ======================================================== -->
         <img src="profile.jpg" alt="Hani Yatimi">
-        <div class="profile-label">● AI & Content Creator ●</div>
+        <div class="profile-label">● HANI AI & TECH ●</div>
       </div>
     </div>
 
     <div class="stats reveal">
-      <div class="stat"><i class="fa-solid fa-users"></i><b>10K+</b><span data-ar="متابع" data-en="Followers">متابع</span></div>
+      <div class="stat"><i class="fa-solid fa-users"></i><b>7.2K+</b><span data-ar="متابع" data-en="Followers">متابع</span></div>
       <div class="stat"><i class="fa-solid fa-circle-play"></i><b>100+</b><span data-ar="فيديو" data-en="Videos">فيديو</span></div>
-      <div class="stat"><i class="fa-solid fa-briefcase"></i><b>50+</b><span data-ar="عميل" data-en="Clients">عميل</span></div>
+      <div class="stat"><i class="fa-solid fa-microchip"></i><b>AI & Tech</b><span data-ar="تخصص تقني" data-en="Tech Focus">تخصص تقني</span></div>
       <div class="stat"><i class="fa-solid fa-award"></i><b>3+</b><span data-ar="سنوات خبرة" data-en="Years Experience">سنوات خبرة</span></div>
     </div>
   </div>
@@ -708,7 +772,7 @@ footer{
 <section class="section" id="services">
   <div class="container">
     <h2 class="section-title reveal" data-ar="خدماتي" data-en="Services">خدماتي</h2>
-    <p class="section-sub reveal" data-ar="خدمات واضحة تساعدك تبني حضور أقوى وتظهر بشكل احترافي." data-en="Clear services to help you build a stronger and more professional online presence.">خدمات واضحة تساعدك تبني حضور أقوى وتظهر بشكل احترافي.</p>
+    <p class="section-sub reveal" data-ar="حلول عملية تجمع بين الذكاء الاصطناعي، المونتاج الاحترافي، وتطوير المحتوى." data-en="Practical solutions combining AI workflows, professional video editing, and content strategy.">حلول عملية تجمع بين الذكاء الاصطناعي، المونتاج الاحترافي، وتطوير المحتوى.</p>
 
     <div class="grid services">
       <article class="card reveal mouse-3d"><div class="icon"><i class="fa-solid fa-pen-to-square"></i></div><h3 data-ar="صناعة المحتوى" data-en="Content Creation">صناعة المحتوى</h3><p data-ar="أفكار وسكربتات وهوك قوي يجذب الانتباه." data-en="Ideas, scripts, and strong hooks that grab attention.">أفكار وسكربتات وهوك قوي يجذب الانتباه.</p></article>
@@ -722,12 +786,41 @@ footer{
 <section class="section" id="works">
   <div class="container">
     <h2 class="section-title reveal" data-ar="أعمالي" data-en="My Work">أعمالي</h2>
-    <p class="section-sub reveal" data-ar="هنا يمكنك وضع فيديوهاتك لاحقاً: قبل وبعد، ريلز، مونتاج، ومحتوى AI." data-en="Add your videos here later: before/after, Reels, editing, and AI content.">هنا يمكنك وضع فيديوهاتك لاحقاً: قبل وبعد، ريلز، مونتاج، ومحتوى AI.</p>
+    <p class="section-sub reveal" data-ar="هنا يمكنك وضع فيديوهاتك لاحقاً: مراجعات تقنية، ريلز، مونتاج، ومحتوى AI." data-en="Add your videos here later: tech reviews, Reels, editing, and AI content.">هنا يمكنك وضع فيديوهاتك لاحقاً: مراجعات تقنية، ريلز، مونتاج، ومحتوى AI.</p>
 
     <div class="grid works">
-      <article class="work reveal mouse-3d"><div class="media"><div class="play"><i class="fa-solid fa-play"></i></div></div><h3>Before / After</h3><p data-ar="فيديو يوضح الفرق قبل وبعد المونتاج." data-en="A video showing the transformation before and after editing.">فيديو يوضح الفرق قبل وبعد المونتاج.</p></article>
-      <article class="work reveal mouse-3d"><div class="media"><div class="play"><i class="fa-solid fa-play"></i></div></div><h3>Reels Editing</h3><p data-ar="مثال لفيديو قصير جاهز للسوشال ميديا." data-en="A short-form video ready for social media.">مثال لفيديو قصير جاهز للسوشال ميديا.</p></article>
-      <article class="work reveal mouse-3d"><div class="media"><div class="play"><i class="fa-solid fa-play"></i></div></div><h3>AI Content</h3><p data-ar="محتوى عن أدوات الذكاء الاصطناعي." data-en="Content focused on AI tools and workflows.">محتوى عن أدوات الذكاء الاصطناعي.</p></article>
+      <!-- ========================================================================= -->
+      <!-- [2] قسم الأعمال (1): ضع رابط الريلز أو صورة مصغرة <img src="work1.jpg">   -->
+      <!-- ========================================================================= -->
+      <article class="work reveal mouse-3d">
+        <div class="media">
+          <div class="play"><i class="fa-solid fa-play"></i></div>
+        </div>
+        <h3>AI Tools & Workflows</h3>
+        <p data-ar="شروحات عملية لأقوى أدوات الذكاء الاصطناعي لرفع الإنتاجية." data-en="Practical guides on top AI tools to boost productivity.">شروحات عملية لأقوى أدوات الذكاء الاصطناعي لرفع الإنتاجية.</p>
+      </article>
+
+      <!-- ========================================================================= -->
+      <!-- [2] قسم الأعمال (2): ضع رابط أو صورة مصغرة لفيديو الريلز الثاني هنا      -->
+      <!-- ========================================================================= -->
+      <article class="work reveal mouse-3d">
+        <div class="media">
+          <div class="play"><i class="fa-solid fa-play"></i></div>
+        </div>
+        <h3>Reels Editing</h3>
+        <p data-ar="مونتاج ديناميكي سريع الإيقاع مخصص لمنصات التواصل." data-en="Fast-paced dynamic editing tailored for social platforms.">مونتاج ديناميكي سريع الإيقاع مخصص لمنصات التواصل.</p>
+      </article>
+
+      <!-- ========================================================================= -->
+      <!-- [2] قسم الأعمال (3): ضع رابط أو صورة مصغرة لفيديو مراجعات المعدات هنا    -->
+      <!-- ========================================================================= -->
+      <article class="work reveal mouse-3d">
+        <div class="media">
+          <div class="play"><i class="fa-solid fa-play"></i></div>
+        </div>
+        <h3>Tech & Gear Reviews</h3>
+        <p data-ar="مراجعات تقنية للمعدات والأجهزة بأسلوب بصري احترافي." data-en="Unbiased tech and gear reviews with clean visual storytelling.">مراجعات تقنية للمعدات والأجهزة بأسلوب بصري احترافي.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -735,12 +828,38 @@ footer{
 <section class="section" id="testimonials">
   <div class="container">
     <h2 class="section-title reveal" data-ar="آراء العملاء" data-en="Testimonials">آراء العملاء</h2>
-    <p class="section-sub reveal" data-ar="ضع هنا سكرين شوت رسائل العملاء والتقييمات لاحقاً." data-en="Add client screenshots and feedback here later.">ضع هنا سكرين شوت رسائل العملاء والتقييمات لاحقاً.</p>
+    <p class="section-sub reveal" data-ar="نماذج من تجارب العملاء والتفاعل مع المحتوى." data-en="Client feedback and audience engagement highlights.">نماذج من تجارب العملاء والتفاعل مع المحتوى.</p>
 
     <div class="grid testimonials">
-      <article class="testimonial reveal mouse-3d"><div class="stars">★★★★★</div><p data-ar="تعامل احترافي وجودة ممتازة في المونتاج." data-en="Professional work and excellent editing quality.">تعامل احترافي وجودة ممتازة في المونتاج.</p><div class="client"><div class="avatar">A</div><b>Client</b></div></article>
-      <article class="testimonial reveal mouse-3d"><div class="stars">★★★★★</div><p data-ar="الأفكار واضحة والتنفيذ سريع ومميز." data-en="Clear ideas, fast delivery, and great execution.">الأفكار واضحة والتنفيذ سريع ومميز.</p><div class="client"><div class="avatar">S</div><b>Client</b></div></article>
-      <article class="testimonial reveal mouse-3d"><div class="stars">★★★★★</div><p data-ar="ساعدني في تحسين شكل الحساب والمحتوى." data-en="Helped improve my profile and content style.">ساعدني في تحسين شكل الحساب والمحتوى.</p><div class="client"><div class="avatar">M</div><b>Client</b></div></article>
+      <!-- ================================================================================ -->
+      <!-- [3] رأي العميل (1): لإضافة سكرين شوت، احذف علامتي <!-- و --> من سطر الصورة      -->
+      <!-- ================================================================================ -->
+      <article class="testimonial reveal mouse-3d">
+        <div class="stars">★★★★★</div>
+        <!-- <div class="screenshot-slot"><img src="review1.jpg" alt="رأي العميل 1"></div> -->
+        <p data-ar="تعامل احترافي وجودة ممتازة في المونتاج." data-en="Professional work and excellent editing quality.">تعامل احترافي وجودة ممتازة في المونتاج.</p>
+        <div class="client"><div class="avatar">A</div><b>Client</b></div>
+      </article>
+
+      <!-- ================================================================================ -->
+      <!-- [3] رأي العميل (2): لإضافة سكرين شوت، احذف علامتي <!-- و --> من سطر الصورة      -->
+      <!-- ================================================================================ -->
+      <article class="testimonial reveal mouse-3d">
+        <div class="stars">★★★★★</div>
+        <!-- <div class="screenshot-slot"><img src="review2.jpg" alt="رأي العميل 2"></div> -->
+        <p data-ar="الأفكار واضحة والتنفيذ سريع ومميز." data-en="Clear ideas, fast delivery, and great execution.">الأفكار واضحة والتنفيذ سريع ومميز.</p>
+        <div class="client"><div class="avatar">S</div><b>Client</b></div>
+      </article>
+
+      <!-- ================================================================================ -->
+      <!-- [3] رأي العميل (3): لإضافة سكرين شوت، احذف علامتي <!-- و --> من سطر الصورة      -->
+      <!-- ================================================================================ -->
+      <article class="testimonial reveal mouse-3d">
+        <div class="stars">★★★★★</div>
+        <!-- <div class="screenshot-slot"><img src="review3.jpg" alt="رأي العميل 3"></div> -->
+        <p data-ar="ساعدني في تحسين شكل الحساب والمحتوى." data-en="Helped improve my profile and content style.">ساعدني في تحسين شكل الحساب والمحتوى.</p>
+        <div class="client"><div class="avatar">M</div><b>Client</b></div>
+      </article>
     </div>
   </div>
 </section>
@@ -748,14 +867,29 @@ footer{
 <section class="section" id="contact">
   <div class="container">
     <h2 class="section-title reveal" data-ar="تواصل معي" data-en="Contact Me">تواصل معي</h2>
-    <p class="section-sub reveal" data-ar="روابط مهمة فقط، بدون زحمة." data-en="Only the important links. Clean and simple.">روابط مهمة فقط، بدون زحمة.</p>
+    <p class="section-sub reveal" data-ar="حساباتي الرسمية وقنوات التواصل المباشر." data-en="My official accounts and direct contact channels.">حساباتي الرسمية وقنوات التواصل المباشر.</p>
 
+    <!-- ============================================================================== -->
+    <!-- [4] روابط التواصل الاجتماعي الخاصة بقناتك (عدّل أي رابط داخل href="" إذا لزم)  -->
+    <!-- ============================================================================== -->
     <div class="contact-list reveal">
-      <a class="social" href="https://www.instagram.com/hani_yatimi" target="_blank"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
-      <a class="social" href="https://www.tiktok.com/@hani_yatimi" target="_blank"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></a>
-      <a class="social" href="https://www.youtube.com/@haniyatimi" target="_blank"><i class="fa-brands fa-youtube"></i><span>YouTube</span></a>
-      <a class="social" href="mailto:contact@haniyatimi.com"><i class="fa-solid fa-envelope"></i><span>Email</span></a>
-      <a class="social" href="https://wa.me/96500000000" target="_blank"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
+      <!-- رابط الإنستغرام الرسمي -->
+      <a class="social" href="https://www.instagram.com/hani_yatimi" target="_blank"><i class="fa-brands fa-instagram"></i><span>Instagram — @hani_yatimi</span></a>
+      
+      <!-- هنا تضيف لينك الفيسبوك الخاص بك -->
+      <a class="social" href="https://www.facebook.com/heni.yatimi" target="_blank"><i class="fa-brands fa-facebook"></i><span>Facebook — Hani Yatimi</span></a>
+      
+      <!-- هنا تضيف لينك التيك توك الخاص بك -->
+      <a class="social" href="https://www.tiktok.com/@hani_yatimi" target="_blank"><i class="fa-brands fa-tiktok"></i><span>TikTok — @hani_yatimi</span></a>
+      
+      <!-- هنا تضيف لينك اليوتيوب الخاص بك -->
+      <a class="social" href="https://www.youtube.com/@haniyatimi" target="_blank"><i class="fa-brands fa-youtube"></i><span>YouTube — @haniyatimi</span></a>
+      
+      <!-- البريد الإلكتروني الرسمي -->
+      <a class="social" href="mailto:litaimhani@gmail.com"><i class="fa-solid fa-envelope"></i><span>contact@haniyatimi.com</span></a>
+      
+      <!-- رابط الواتساب المباشر -->
+      <a class="social" href="https://wa.me/96592246007" target="_blank"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp — +965 9224 6007</span></a>
     </div>
 
     <div class="whatsapp-box reveal mouse-3d">
@@ -767,7 +901,7 @@ footer{
   </div>
 </section>
 
-<footer>© 2026 Hani Yatimi — AI & Content Creator</footer>
+<footer>© 2026 Hani Yatimi | AI & Tech — haniyatimi.com</footer>
 </main>
 
 <script>
@@ -844,10 +978,11 @@ function draw(){
     if(a.x<0||a.x>W)a.vx*=-1;
     if(a.y<0||a.y>H)a.vy*=-1;
 
+    /* نقاط الشبكة بألوان الهوية: Violet #885CF6 و Cyan #00C8FF */
     ctx.beginPath();
     ctx.arc(a.x,a.y,a.r,0,Math.PI*2);
-    ctx.fillStyle=i%5?'#D4FE08':'#191D32';
-    ctx.globalAlpha=i%5?.9:.32;
+    ctx.fillStyle=i%4?'#885CF6':'#00C8FF';
+    ctx.globalAlpha=i%4?.75:.9;
     ctx.fill();
     ctx.globalAlpha=1;
 
@@ -858,13 +993,13 @@ function draw(){
         ctx.beginPath();
         ctx.moveTo(a.x,a.y);
         ctx.lineTo(b.x,b.y);
-        ctx.strokeStyle=`rgba(25,29,50,${(1-d/150)*.18})`;
+        ctx.strokeStyle=`rgba(136,92,246,${(1-d/150)*.25})`;
         ctx.lineWidth=.9;
         ctx.stroke();
         ctx.beginPath();
         ctx.moveTo(a.x,a.y);
         ctx.lineTo(b.x,b.y);
-        ctx.strokeStyle=`rgba(212,254,8,${(1-d/150)*.36})`;
+        ctx.strokeStyle=`rgba(0,200,255,${(1-d/150)*.22})`;
         ctx.lineWidth=.75;
         ctx.stroke();
       }
@@ -876,7 +1011,7 @@ function draw(){
         ctx.beginPath();
         ctx.moveTo(a.x,a.y);
         ctx.lineTo(mouse.x,mouse.y);
-        ctx.strokeStyle='rgba(212,254,8,.45)';
+        ctx.strokeStyle='rgba(0,200,255,.45)';
         ctx.lineWidth=1.2;
         ctx.stroke();
       }
